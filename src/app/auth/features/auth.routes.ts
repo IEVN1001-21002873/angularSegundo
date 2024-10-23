@@ -11,8 +11,14 @@ export default[
         loadComponent:() => import('./sign-up/sign-up.component'),
     },
 
-    {
-        path: 'ejemplo1-routes.ts',
-        loadComponent:() => import('../../formulario/ejemplo1/ejemplo1.component'),
-    },
+    // {
+    //     path: 'ejemplo1-routes.ts',
+    //     loadComponent:() => import('../../formulario/ejemplo1/ejemplo1.component'),
+    // },
+
+    // {
+    //     path: 'resistencias-routes.ts',
+    //     loadComponent:() => import('../../formulario/resistencias/resistencias.component'),
+    // },
+
 ] as Routes
