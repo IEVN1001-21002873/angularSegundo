@@ -13,7 +13,8 @@ export const routes: Routes=[
     {
         path: 'formulario',
         loadChildren:()=> import (  "./formulario/rutas.formulario" )
-    },
+    }
+    
     // {
     //     path: 'resistencias',  // Define la ruta 'ejemplo1'
     //     component: ResistenciasComponent  // Asigna el componente Ejemplo1Component para esta ruta

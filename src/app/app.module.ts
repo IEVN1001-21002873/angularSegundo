@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms'; // Importa FormsModule
   declarations: [],
   imports: [
     CommonModule,
-    FormsModule // Asegúrate de incluirlo aquí
+    FormsModule 
   ],
 })
 export class EmpleadosModule { }

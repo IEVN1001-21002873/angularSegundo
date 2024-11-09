@@ -1,0 +1,150 @@
+<div class="flex flex-col h-screen">
+    <!-- Formulario de Pedido de Pizza (parte superior que ocupa el 100% de la altura) -->
+    <div class="flex-1 p-8 bg-white shadow-lg rounded-lg mb-6">
+      <h2 class="text-3xl font-semibold text-center mb-6 text-gray-800">Formulario de Pedido de Pizza</h2>
+  
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="space-y-4">
+        <!-- Datos del cliente -->
+        <div>
+          <label for="fullName" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
+          <input type="text" id="fullName" formControlName="fullName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        </div>
+  
+        <div>
+          <label for="address" class="block text-sm font-medium text-gray-700">Dirección</label>
+          <input type="text" id="address" formControlName="address" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        </div>
+  
+        <div>
+          <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono</label>
+          <input type="tel" id="phone" formControlName="phone" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        </div>
+  
+        <div>
+          <label for="purchaseDate" class="block text-sm font-medium text-gray-700">Fecha de Compra</label>
+          <input type="date" id="purchaseDate" formControlName="purchaseDate" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-200 cursor-not-allowed sm:text-sm" [disabled]="true">
+        </div>
+  
+        <!-- Tamaño -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Tamaño</label>
+          <div class="flex space-x-4 mt-2">
+            <div class="flex items-center" *ngFor="let size of sizeOptions">
+              <input type="radio" [id]="size" formControlName="size" [value]="size" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+              <label [for]="size" class="ml-2 text-sm text-gray-700">{{ size }}</label>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Ingredientes -->
+        <div formGroupName="toppings">
+          <label class="block text-sm font-medium text-gray-700">Elige los ingredientes</label>
+          <div class="flex flex-wrap gap-4 mt-2">
+            <div class="flex items-center" *ngFor="let topping of toppingOptions">
+              <input type="checkbox" [id]="topping" [formControlName]="topping" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500">
+              <label [for]="topping" class="ml-2 text-sm text-gray-700">{{ topping }}</label>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Cantidad de Pizzas -->
+        <div>
+          <label for="quantity" class="block text-sm font-medium text-gray-700">Cantidad de Pizzas</label>
+          <input type="number" id="quantity" formControlName="quantity" min="1" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
+        </div>
+  
+        <!-- Botón de Enviar (más pequeño) -->
+        <div class="flex justify-center">
+          <button type="submit" class="w-1/2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 text-sm">
+            Añadir Pedido
+          </button>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Contenedor para los datos del pedido y el botón de Ventas del Día juntos -->
+    <div class="flex space-x-6 mb-6">
+      <!-- Datos del Pedido (más pequeños) -->
+      <div class="w-full max-w-md p-4 bg-white shadow-lg rounded-lg">
+        <h2 class="text-xl font-semibold text-center mb-4 text-gray-800">Datos del Pedido</h2>
+        
+        <table class="min-w-full table-auto divide-y divide-gray-200 text-sm">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Nombre</th>
+              <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Dirección</th>
+              <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Teléfono</th>
+              <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Fecha de Compra</th>
+              <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Tamaño</th>
+              <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Ingredientes</th>
+              <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Cantidad</th>
+              <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let order of orders; let i = index" class="hover:bg-gray-50">
+              <td class="px-2 py-1 whitespace-nowrap">{{ order.fullName }}</td>
+              <td class="px-2 py-1 whitespace-nowrap">{{ order.address }}</td>
+              <td class="px-2 py-1 whitespace-nowrap">{{ order.phone }}</td>
+              <td class="px-2 py-1 whitespace-nowrap">{{ order.purchaseDate }}</td>
+              <td class="px-2 py-1 whitespace-nowrap">{{ order.pedido.size }}</td>
+              <td class="px-2 py-1 whitespace-nowrap">{{ order.pedido.toppings.join(', ') }}</td>
+              <td class="px-2 py-1 whitespace-nowrap">{{ order.pedido.quantity }}</td>
+              <td class="px-2 py-1 whitespace-nowrap">
+                <button (click)="removeOrder(i)" class="text-red-500 hover:text-red-600 transition text-xs">Quitar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+  
+        <div class="w-full flex justify-center mt-2">
+          <h3 class="text-lg font-semibold text-gray-800">Total: {{ totalPrice | currency }}</h3>
+        </div>
+  
+        <div class="w-full flex justify-center mt-4">
+          <button (click)="submitOrder()" class="w-3/4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300 text-sm">
+            Enviar Pedido
+          </button>
+        </div>
+      </div>
+  
+      <!-- Ventas del Día -->
+      <div class="w-full flex justify-end"> <!-- Alineación a la derecha -->
+        <div class="w-full max-w-lg bg-gray-200 p-6 rounded-lg">
+          <div class="w-full flex justify-start mb-4">
+            <input type="date" #ventasFecha class="border border-gray-300 rounded-md px-3 py-2 mr-4">
+            <button (click)="fetchVentasDelDia()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300">
+              Ventas del Día
+            </button>
+          </div>
+          <div id="ventasDelDia" class="w-full overflow-x-auto">
+            <table class="min-w-full table-auto divide-y divide-gray-200">
+              <thead class="bg-gray-100">
+                <tr>
+                  <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Fecha</th>
+                  <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Nombre</th>
+                  <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Dirección</th>
+                  <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Teléfono</th>
+                  <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Tamaño</th>
+                  <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Ingredientes</th>
+                  <th class="px-2 py-1 text-left font-medium text-gray-500 uppercase">Cantidad</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr *ngFor="let order of ventasDelDia">
+                  <td class="px-2 py-1 whitespace-nowrap">{{ order.purchaseDate }}</td>
+                  <td class="px-2 py-1 whitespace-nowrap">{{ order.fullName }}</td>
+                  <td class="px-2 py-1 whitespace-nowrap">{{ order.address }}</td>
+                  <td class="px-2 py-1 whitespace-nowrap">{{ order.phone }}</td>
+                  <td class="px-2 py-1 whitespace-nowrap">{{ order.pedido.size }}</td>
+                  <td class="px-2 py-1 whitespace-nowrap">{{ order.pedido.toppings.join(', ') }}</td>
+                  <td class="px-2 py-1 whitespace-nowrap">{{ order.pedido.quantity }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
