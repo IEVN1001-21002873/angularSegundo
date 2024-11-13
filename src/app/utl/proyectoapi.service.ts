@@ -10,8 +10,7 @@ import { Observable } from 'rxjs';
 export class ProyectoapiService {
  
   constructor(private  http: HttpClient) { }
- 
- 
+  
 public getAlumnos():Observable<AlumnosUtl[]>{
   return this.http.get<AlumnosUtl[]>('http://127.0.0.1:5000/alumnos')
 }

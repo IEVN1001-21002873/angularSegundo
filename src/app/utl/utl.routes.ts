@@ -3,8 +3,8 @@ import { Ejemplo1Component } from "./formulario/ejemplo1/ejemplo1.component";
 // import { ResistenciasComponent } from "./formulario/resistencias/resistencias.component";
 export const routes: Routes=[
     {
-        path: 'auth',
-        loadChildren:()=> import (  "./auth/features/auth.routes" )
+        path: 'listaalumnos',
+        loadChildren:()=> import (  "./alumnos/alumnos.component" )
     },
     {
         path:'ejemplo1',
@@ -17,6 +17,10 @@ export const routes: Routes=[
     {
         path: 'utl',
         loadChildren:()=> import('./utl/utl.routes')
+    },
+    {
+        path: 'agregar',
+        loadChildren:()=> import('.//agregar/agregar.component')
     },
     // {
     //     path: 'resistencias',  // Define la ruta 'ejemplo1'
