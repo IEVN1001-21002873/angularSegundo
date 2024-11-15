@@ -16,10 +16,6 @@ export const routes: Routes=[
     },
     {
         path: 'utl',
-        loadChildren:()=> import('./utl/utl.routes')
-    },
-    // {
-    //     path: 'resistencias',  // Define la ruta 'ejemplo1'
-    //     component: ResistenciasComponent  // Asigna el componente Ejemplo1Component para esta ruta
-    //   },
+        loadChildren: () => import('./utl/utl.routes'),
+    }
 ];

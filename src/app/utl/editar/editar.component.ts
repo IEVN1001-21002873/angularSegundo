@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './editar.component.html',
   styles: ``
 })
-export class EditarComponent {
+export default class EditarComponent {
 
 }

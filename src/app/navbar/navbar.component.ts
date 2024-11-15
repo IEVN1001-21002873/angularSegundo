@@ -8,6 +8,6 @@ import { RouterLink } from '@angular/router';
   templateUrl: './navbar.component.html',
   styles: ``
 })
-export class NavbarComponent {
+export default class NavbarComponent {
 
 }
